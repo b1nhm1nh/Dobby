@@ -109,11 +109,13 @@ uint32_t arm_shift_c(uint32_t val, uint32_t shift_type, uint32_t shift_count, ui
       r_val |= 0xFFFFFFFF00000000ULL;
     }
     r_val = r_val >> (shift_count - 1);
+    val = (r_val >> 1);
+    break;
+  case arm_shift_ror:
     val = (val >> (shift_count % 32)) | (val << (32 - (shift_count % 32)));
     break;
   case arm_shift_rrx:
     val = (carry_in << 31) | (val >> 1);
-    break;
     break;
   }
   return val;
